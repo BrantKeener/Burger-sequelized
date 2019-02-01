@@ -6,9 +6,9 @@
         <h2>Burgers waiting to be eaten:</h2>
 
         <ol>
-            {{#each burgers}}
+            {{#each burger}}
                 {{#unless devoured}}
-                    <li class="uneaten-burger">{{this.burger_name}}</li><button class="devour-burg" data-id={{this.id}}>Devour It!</button>
+                    <li class="uneaten-burger">{{this.burgerName}}</li><button class="devour-burg" data-id={{this.id}}>Devour It!</button>
                 {{/unless}}
             {{/each}}
         </ol>
@@ -22,9 +22,9 @@
         <h2>Burgers that have been eaten:</h2>
 
         <ol>
-            {{#each burgers}}
+            {{#each burger}}
                 {{#if devoured}}
-                    <li class="eaten-burger" data-id={{this.id}}>{{this.burger_name}}</li>
+                    <li class="eaten-burger" data-id={{this.id}}>{{this.burgerName}}</li>
                 {{/if}}
             {{/each}}
         </ol>

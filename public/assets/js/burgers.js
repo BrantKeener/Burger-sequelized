@@ -79,7 +79,7 @@ devourIt = (data) => {
 addBurger = () => {
     let name = document.getElementsByName('burg-name')[0].value;
     const url = '/api/burgers'
-    const newBurger = {'name': name};
+    const newBurger = {'burgerName': name};
     if(name !== '') {
         if(name.trim() !== '') {
             name = '';

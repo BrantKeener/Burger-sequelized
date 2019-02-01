@@ -1,26 +1,32 @@
 {
-  "name": "Eat-Da-Burger",
+  "name": "Burger-sequelized",
   "version": "1.0.0",
-  "description": "A restaurant app that allows users to input the burgers they would like to eat.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/BrantKeener/Eat-Da-Burger.git"
-  },
-  "keywords": ["burgers", "restaurant", "fun", "burgORM"],
-  "author": "Brant Keener",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/BrantKeener/Eat-Da-Burger/issues"
-  },
-  "homepage": "https://github.com/BrantKeener/Eat-Da-Burger#readme",
+  "description": "The burger app re-imagined with Sequelize",
+  "main": "server.js",
   "dependencies": {
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "mysql": "^2.16.0"
-  }
+    "mysql2": "^1.6.4",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BrantKeener/Burger-sequelized.git"
+  },
+  "keywords": [
+    "burger",
+    "sequelize"
+  ],
+  "author": "Brant Keener",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BrantKeener/Burger-sequelized/issues"
+  },
+  "homepage": "https://github.com/BrantKeener/Burger-sequelized#readme"
 }
