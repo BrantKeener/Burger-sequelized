@@ -1,0 +1,46 @@
+
+<section id="burg-display-area">
+
+    <section id="not-eaten">
+
+        <h2>Burgers waiting to be eaten:</h2>
+
+        <ol>
+            {{#each burgers}}
+                {{#unless devoured}}
+                    <li class="uneaten-burger">{{this.burger_name}}</li><button class="devour-burg" data-id={{this.id}}>Devour It!</button>
+                {{/unless}}
+            {{/each}}
+        </ol>
+
+    </section>
+
+    <img id="big-burger" src="../public/assets/img/Cali_burger.png">
+
+    <section id="eaten">
+
+        <h2>Burgers that have been eaten:</h2>
+
+        <ol>
+            {{#each burgers}}
+                {{#if devoured}}
+                    <li class="eaten-burger" data-id={{this.id}}>{{this.burger_name}}</li>
+                {{/if}}
+            {{/each}}
+        </ol>
+
+    </section>
+
+</section>
+
+<form id="add-a-burg">
+    <fieldset id="form-house">
+        <legend id="burg-legend">Add A Burger Here</legend>
+        <label for="burg-name">
+            <input type="text" autocomplete="off" id="burg-name" name="burg-name">
+        </label>
+        <section id="submit-area">
+            <button id="add-submit" type="submit">Add Your Burger</button>
+        </section>
+    </fieldset>
+</form>
