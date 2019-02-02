@@ -5,7 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     let Burger = sequelize.define("Burger", {
         burgerName: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            validate: {
+                len: [1]
+            }
         },
         devoured: {
             type: DataTypes.BOOLEAN,
@@ -13,5 +16,14 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: 0
         }
     });
+    
+    // Associate burgers with Customers in a one to one relationship
+    // Burger.associate = (models) => {
+    //     models.Burger.hasOne(models.Customer, {
+    //         foreignKey: {
+    //             defaultValue: 0
+    //         }
+    //     });
+    // };
     return Burger;
 };

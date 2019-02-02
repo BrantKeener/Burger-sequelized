@@ -1,9 +1,6 @@
 
 // This will control our client-side js needs
 
-// TODO add modal functionality for empty strings
-// TODO add modal functionality for burger update?
-
 // Evaluate session data, and if the user is still in the same session, do not run the load animations
 document.addEventListener('DOMContentLoaded', shouldAnimate = () => {
     const data = sessionStorage.getItem('singleSess');
@@ -33,7 +30,7 @@ sessionKeeper = () => {
 
 // Event Delegation
 document.addEventListener('click', (event) => {
-    if(event.target.id === 'add-submit') {
+    if(event.target.id === 'add-submit' || event.target.id === 'new-customer') {
         event.preventDefault();
     }
     const buttonClick = () => {
@@ -44,12 +41,16 @@ document.addEventListener('click', (event) => {
         };
     };
     const data = event.target.dataset.id; 
+    console.log(buttonClick());
     switch(buttonClick()) {
         case('devour-burg'):
         devourIt(data);
         break;
         case('add-submit'):
         addBurger();
+        break;
+        case('new-customer'):
+        addCustomer();
         break;
         case('modal-container'):
         toggleModal();
@@ -93,16 +94,56 @@ addBurger = () => {
                 location.reload()
             })
         } else {
-            toggleModal();
+            toggleModal('burger');
             return;
         };
     } else {
-        toggleModal();
+        toggleModal('burger');
         return;
     };
 };
 
-const toggleModal = () => {
+// Add a Customer
+addCustomer = () => {
+    let name = document.getElementsByName('cust-name')[0].value;
+    const url = 'api/customers';
+    const newCustomer = { "customerName" : name};
+    if(name !== '') {
+        if(name.trim() !== '') {
+            name = '';
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(newCustomer),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }).then(res => {
+                location.reload()
+            })
+        } else {
+            toggleModal('customer');
+            return;
+        };
+    } else {
+        toggleModal('customer');
+        return;
+    };
+}
+
+const toggleModal = (corb) => {
+    const burgerEmpty = 'Nobody Likes an Empty Burger'
+    const customerEmpty = 'Your Horse May Not Have a Name, But You Must'
+    const giveAName = 'Give us a name.'
+    const head = document.getElementById('modal-head');
+    const body = document.getElementById('modal-body');
+    if(corb === 'burger') {
+        head.textContent = burgerEmpty;
+        body.textContent = giveAName;
+    }
+    if(corb === 'customer') {
+        head.textContent = customerEmpty;
+        body.textContent = giveAName;
+    }
     const modal = document.getElementById('modal-container');
     modal.classList.toggle('modal-display');
 }

@@ -33,14 +33,38 @@
 
 </section>
 
-<form id="add-a-burg">
-    <fieldset id="form-house">
-        <legend id="burg-legend">Add A Burger Here</legend>
-        <label for="burg-name">
-            <input type="text" autocomplete="off" id="burg-name" name="burg-name">
-        </label>
-        <section id="submit-area">
-            <button id="add-submit" type="submit">Add Your Burger</button>
-        </section>
-    </fieldset>
-</form>
+<section id="user-choices">
+    <form id="add-a-cust">
+        <fieldset id="cust-house">
+            <legend id="cust-legend">Customer</legend>
+            <label for="cust-name" class="customer-descriptors">New Customer
+                <input type="text" autocomplete="off" id="cust-name" name="cust-name">
+            </label>
+            <section id="submit-area">
+                <button id="new-customer" type="submit">Add Your Name</button>
+            </section>
+            {{!-- <p class="customer-descriptors"> or </p> --}}
+            <section id="return-area">
+                <label id="return-label" for="existing-cust" class="customer-descriptors">Returning Customer</label>
+                <select id="existing-cust" name="existing-cust">
+                    <option autocomplete="off" disabled="disabled" selected="selected" value=""> --- Select an option ---</option>
+                    {{#each customer}}
+                        <option autocomplete="off" class="customer" data-id={{this.id}}>{{this.customerName}}</option>
+                    {{/each}}
+                </select>
+            </section>
+        </fieldset>
+    </form>
+
+    <form id="add-a-burg">
+        <fieldset id="form-house">
+            <legend id="burg-legend">Add A Burger Here</legend>
+            <label for="burg-name">
+                <input type="text" autocomplete="off" id="burg-name" name="burg-name">
+            </label>
+            <section id="submit-area">
+                <button id="add-submit" type="submit">Add Your Burger</button>
+            </section>
+        </fieldset>
+    </form>
+</section>
