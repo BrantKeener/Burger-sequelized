@@ -41,7 +41,6 @@ document.addEventListener('click', (event) => {
         };
     };
     const data = event.target.dataset.id; 
-    console.log(buttonClick());
     switch(buttonClick()) {
         case('devour-burg'):
         devourIt(data);
@@ -63,11 +62,15 @@ document.addEventListener('click', (event) => {
 
 // Function to handle the "Devour it" button click
 devourIt = (data) => {
+    const userMenu = document.getElementById('existing-cust');
+    const selectedUser = userMenu.value;
     const url = `/api/burgers/${data}`;
-    const status = {'status': 1};
+    if(selectedUser === '') {
+        return toggleModal('nocustomer');
+    }
     fetch(url, {
         method: 'PUT',
-        body: JSON.stringify(status),
+        body: JSON.stringify({'status': 1, 'customer': parseInt(selectedUser)}),
         headers: {
             "Content-Type": "application/json"
         }
@@ -78,15 +81,22 @@ devourIt = (data) => {
 
 // Function to send our new burger data to the database
 addBurger = () => {
+    const userMenu = document.getElementById('existing-cust');
+    const selectedUser = userMenu.value;
     let name = document.getElementsByName('burg-name')[0].value;
+    let nameClear = document.getElementsByName('burg-name')[0];
     const url = '/api/burgers'
-    const newBurger = {'burgerName': name};
+    const newBurgerObject = {'burgerName': name.trim(), 'CustomerId': parseInt(selectedUser)};
+    if(selectedUser === '') {
+        nameClear.value = '';
+        return toggleModal('nocustomer');
+    }
     if(name !== '') {
         if(name.trim() !== '') {
-            name = '';
+            nameClear.value = '';
             fetch(url, {
                 method: 'POST',
-                body: JSON.stringify(newBurger),
+                body: JSON.stringify(newBurgerObject),
                 headers: {
                     "Content-Type": "application/json"
                 }
@@ -106,11 +116,12 @@ addBurger = () => {
 // Add a Customer
 addCustomer = () => {
     let name = document.getElementsByName('cust-name')[0].value;
+    const nameClear = document.getElementsByName('cust-name')[0];
     const url = 'api/customers';
-    const newCustomer = { "customerName" : name};
+    const newCustomer = { "customerName" : name.trim()};
     if(name !== '') {
         if(name.trim() !== '') {
-            name = '';
+            nameClear.value = '';
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(newCustomer),
@@ -131,18 +142,22 @@ addCustomer = () => {
 }
 
 const toggleModal = (corb) => {
-    const burgerEmpty = 'Nobody Likes an Empty Burger'
-    const customerEmpty = 'Your Horse May Not Have a Name, But You Must'
-    const giveAName = 'Give us a name.'
+    const burgerEmpty = 'Nobody Likes an Empty Burger';
+    const customerEmpty = 'Your Horse May Not Have a Name, But You Must';
+    const userNotSelected = 'You Must Choose a Name From "Returning Customer"';
+    const giveAName = 'Give us a name.';
+    const userDropMenu = 'You can select your name from the dropdown menu.';
     const head = document.getElementById('modal-head');
     const body = document.getElementById('modal-body');
     if(corb === 'burger') {
         head.textContent = burgerEmpty;
         body.textContent = giveAName;
-    }
-    if(corb === 'customer') {
+    } else if(corb === 'customer') {
         head.textContent = customerEmpty;
         body.textContent = giveAName;
+    } else if(corb === 'nocustomer') {
+        head.textContent =  userNotSelected;
+        body.textContent = userDropMenu;
     }
     const modal = document.getElementById('modal-container');
     modal.classList.toggle('modal-display');

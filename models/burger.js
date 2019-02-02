@@ -18,12 +18,12 @@ module.exports = (sequelize, DataTypes) => {
     });
     
     // Associate burgers with Customers in a one to one relationship
-    // Burger.associate = (models) => {
-    //     models.Burger.hasOne(models.Customer, {
-    //         foreignKey: {
-    //             defaultValue: 0
-    //         }
-    //     });
-    // };
+    Burger.associate = (models) => {
+        models.Burger.belongsTo(models.Customer, {
+            foreignKey: {
+                defaultValue: 0
+            }
+        });
+    };
     return Burger;
 };

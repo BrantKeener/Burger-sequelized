@@ -8,7 +8,8 @@
         <ol>
             {{#each burger}}
                 {{#unless devoured}}
-                    <li class="uneaten-burger">{{this.burgerName}}</li><button class="devour-burg" data-id={{this.id}}>Devour It!</button>
+                    <li class="uneaten-burger">{{this.burgerName}}<br>Ordered By: {{this.Customer.dataValues.customerName}}</li>
+                    <button class="devour-burg" data-id={{this.id}}>Devour It!</button>
                 {{/unless}}
             {{/each}}
         </ol>
@@ -24,7 +25,7 @@
         <ol>
             {{#each burger}}
                 {{#if devoured}}
-                    <li class="eaten-burger" data-id={{this.id}}>{{this.burgerName}}</li>
+                    <li class="eaten-burger" data-id={{this.id}}>{{this.burgerName}}<br>Eaten By: {{this.Customer.dataValues.customerName}}</li>
                 {{/if}}
             {{/each}}
         </ol>
@@ -37,19 +38,18 @@
     <form id="add-a-cust">
         <fieldset id="cust-house">
             <legend id="cust-legend">Customer</legend>
-            <label for="cust-name" class="customer-descriptors">New Customer
+            <label for="cust-name" class="customer-descriptors">Add New Customer
                 <input type="text" autocomplete="off" id="cust-name" name="cust-name">
             </label>
             <section id="submit-area">
                 <button id="new-customer" type="submit">Add Your Name</button>
             </section>
-            {{!-- <p class="customer-descriptors"> or </p> --}}
             <section id="return-area">
-                <label id="return-label" for="existing-cust" class="customer-descriptors">Returning Customer</label>
+                <label id="return-label" for="existing-cust" class="customer-descriptors">Customer Name Selection</label>
                 <select id="existing-cust" name="existing-cust">
                     <option autocomplete="off" disabled="disabled" selected="selected" value=""> --- Select an option ---</option>
                     {{#each customer}}
-                        <option autocomplete="off" class="customer" data-id={{this.id}}>{{this.customerName}}</option>
+                        <option autocomplete="off" class="customer" value={{this.id}}>{{this.customerName}}</option>
                     {{/each}}
                 </select>
             </section>
