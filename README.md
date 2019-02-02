@@ -1,7 +1,7 @@
 # Burger-Sequelized
 The burger app re-imagined with Sequelize
 
-**Burger-Sequelized** is an easy interface allowing users to input a burger they would like to eat, and then click on "Devour it" to virtually eat the burger and move it to the eaten field. All of this occurs as updates to a persistent database.
+**Burger-Sequelized** is an easy interface allowing users to input a customer name, a burger they would like to eat, and then click on "Devour it" to virtually eat the burger and move it to the eaten field. All of this occurs as updates to a persistent database.
 
 ## Motivation
 
